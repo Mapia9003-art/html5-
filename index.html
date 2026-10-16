@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="mr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Customer Field Visit</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f1f5f9;
+      margin: 0;
+      padding: 16px;
+    }
+    .container {
+      max-width: 600px;
+      margin: auto;
+      background: white;
+      padding: 20px;
+      border-radius: 14px;
+    }
+    h1 { color: #123b70; font-size: 24px; }
+    label {
+      display: block;
+      margin-top: 14px;
+      font-weight: bold;
+    }
+    input, select, textarea, button {
+      box-sizing: border-box;
+      width: 100%;
+      padding: 12px;
+      margin-top: 6px;
+      border: 1px solid #cbd5e1;
+      border-radius: 8px;
+      font-size: 16px;
+    }
+    button {
+      background: #1455a0;
+      color: white;
+      border: none;
+      margin-top: 18px;
+    }
+    .note { color: #64748b; font-size: 13px; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Customer Field Visit</h1>
+    <p>Customer Visit Report Form</p>
+
+    <form id="visitForm">
+      <label>Customer Name</label>
+      <input id="customerName" required>
+
+      <label>Case ID / Customer Number</label>
+      <input id="caseId">
+
+      <label>Mobile Number</label>
+      <input id="mobile" type="tel">
+
+      <label>Building Name</label>
+      <input id="building">
+
+      <label>Flat Number</label>
+      <input id="flat">
+
+      <label>Full Address</label>
+      <textarea id="address" rows="2"></textarea>
+
+      <label>Visit Date & Time</label>
+      <input id="visitTime" readonly>
+
+      <label>Follow-up Remark</label>
+      <select id="remark">
+        <option>Customer Not Available</option>
+        <option>Refuse To Pay</option>
+        <option>House Locked</option>
+        <option>Building Under Redevelopment</option>
+        <option>Customer Shifted</option>
+        <option>Wrong Address</option>
+        <option>Payment Promised</option>
+        <option>Other</option>
+      </select>
+
+      <label>Detailed Remark</label>
+      <textarea id="details" rows="3"
+        placeholder="भेटीमध्ये काय आढळले ते लिहा"></textarea>
+
+      <label>Next Follow-up Date</label>
+      <input id="nextDate" type="date">
+
+      <label>Building / House Photos</label>
+      <input id="photos" type="file" accept="image/*" multiple>
+
+      <p class="note">अनेक फोटो निवडता येतील. हा प्रारंभिक फॉर्म आहे.</p>
+
+      <button type="submit">Save Visit</button>
+    </form>
+
+    <div id="message"></div>
+  </div>
+
+  <script>
+    const visitTime = document.getElementById("visitTime");
+
+    function updateVisitTime() {
+      visitTime.value = new Date().toLocaleString("en-IN", {
+        dateStyle: "medium",
+        timeStyle: "medium"
+      });
+    }
+
+    updateVisitTime();
+
+    document.getElementById("visitForm").addEventListener("submit",
+      function(event) {
+        event.preventDefault();
+        updateVisitTime();
+        document.getElementById("message").textContent =
+          "फॉर्म तयार आहे. Online saving आणि PDF सुविधा पुढील टप्प्यांत जोडू.";
+      }
+    );
+  </script>
+</body>
+</html>
+
